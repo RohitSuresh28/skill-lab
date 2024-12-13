@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management App</title>
+    <script defer src="app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            margin-bottom: 20px;
+        }
+        main {
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            text-align: left;
+        }
+        input, textarea, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #events-container {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #events-container li {
+            background: #eaf4fc;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Event Management App</h1>
+    </header>
+    <main>
+        <section id="event-form">
+            <h2>Create New Event</h2>
+            <form id="create-event-form">
+                <label for="event-name">Event Name:</label>
+                <input type="text" id="event-name" name="event-name" required>
+
+                <label for="event-date">Date:</label>
+                <input type="date" id="event-date" name="event-date" required>
+
+                <label for="event-time">Time:</label>
+                <input type="time" id="event-time" name="event-time" required>
+
+                <label for="event-description">Description:</label>
+                <textarea id="event-description" name="event-description" rows="4" required></textarea>
+
+                <button type="submit">Add Event</button>
+            </form>
+        </section>
+
+        <section id="event-list">
+            <h2>Upcoming Events</h2>
+            <ul id="events-container">
+                <!-- Events will be dynamically added here -->
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Event Management App</p>
+    </footer>
+    <script>
+        const form = document.getElementById('create-event-form');
+        const eventsContainer = document.getElementById('events-container');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('event-name').value;
+            const date = document.getElementById('event-date').value;
+            const time = document.getElementById('event-time').value;
+            const description = document.getElementById('event-description').value;
+
+            const eventItem = document.createElement('li');
+            eventItem.textContent = `${name} - ${date} ${time}: ${description}`;
+            eventsContainer.appendChild(eventItem);
+
+            form.reset();
+        });
+    </script>
+</body>
+</html>
